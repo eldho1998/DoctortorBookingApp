@@ -1,0 +1,33 @@
+.hospital-nav-icon {
+  background-image: url('../../../public/heart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 80px;
+  height: 70px;
+  margin: 20px;
+  margin-left: 50px;
+}
+.hospital-nav-bars {
+  display: flex;
+  gap: 60px;
+  margin-left: 200px;
+  width: 65%;
+  justify-content: space-around;
+  align-items: center;
+}
+.hospital-nav-bars p {
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: medium;
+  font-weight: bolder;
+  font-style: normal;
+  color: rgb(4, 102, 102);
+  cursor: pointer;
+}
+.Hospital-nav-main {
+  display: flex;
+}
+.hospital-nav-bars p:hover {
+  color: goldenrod;
+}

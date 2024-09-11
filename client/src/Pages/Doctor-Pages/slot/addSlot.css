@@ -1,0 +1,87 @@
+.second-partt {
+  width: 800px;
+  height: 200px;
+  padding: 20px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  border: 1px solid rgb(235, 235, 218);
+  cursor: pointer;
+  background-color: beige;
+  box-shadow: 5px 5px 5px 0px lightgray;
+  transition: all 0.4s;
+}
+.second-partt:hover {
+  box-shadow: 0 0 2px 2px lightgray;
+}
+.slot-page-main {
+  height: 600px;
+  background-color: whitesmoke;
+}
+.Slotform-main {
+  height: 100px;
+  margin: 10px auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.Slotform label {
+  color: black;
+}
+
+.Slotform Input {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.datee {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.timee {
+  width: 300px;
+  height: 40px;
+  display: flex;
+
+  gap: 20px;
+}
+.start-time {
+  min-height: 32px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  width: 130px;
+}
+.start {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.end {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.end-time {
+  min-height: 32px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  width: 130px;
+}
+
+.slots-count {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.button {
+  text-align: center;
+}

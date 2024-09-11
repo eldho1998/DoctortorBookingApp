@@ -1,0 +1,5 @@
+.doc-home {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(245, 242, 238);
+}

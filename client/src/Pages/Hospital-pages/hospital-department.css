@@ -1,0 +1,45 @@
+.department-names h1 {
+  text-align: center;
+  background-color: #32325d;
+  color: whitesmoke;
+  padding: 15px;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+.department-cards {
+  width: 1250px;
+  padding: 15px;
+  margin: 10px auto;
+  margin-top: 30px;
+  border-radius: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+.dpt-cards img {
+  width: 320px;
+  height: 240px;
+  border-radius: 20px;
+  padding: 15px;
+}
+.dpt-cards {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  color: brown;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+.boxx {
+  box-shadow: 0px 5px 5px 0px lightgray;
+  border-radius: 25px;
+}
+.boxx:hover {
+  box-shadow: 0 6px 5px 4px lightgray;
+  cursor: pointer;
+}

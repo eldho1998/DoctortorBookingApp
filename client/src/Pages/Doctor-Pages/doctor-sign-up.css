@@ -1,0 +1,85 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.doctor-form {
+  /* width: 100%; */
+}
+.doctor-form,
+form {
+  display: flex;
+  gap: 50px;
+}
+.doctor-form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 130px;
+}
+.doctor-sign-in-main {
+  /* border: 1px solid white; */
+  padding: 50px;
+  margin-top: 0px;
+  margin-left: 150px;
+  width: fit-content;
+}
+.doctor-first-section,
+.doctor-second-section {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  width: 400px;
+}
+.doctor-Sign-in Button {
+  display: flex;
+  margin-left: 325px;
+}
+.doctor-form label {
+  color: rgb(202, 200, 200);
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+.doctor-main {
+  width: 100%;
+  background-image: url(../../../public/doctorslogin.jpg);
+  background-size: cover;
+  height: 650px;
+  position: relative;
+}
+.Bblack {
+  height: 650px;
+  width: 100%;
+  background-color: rgba(14, 12, 12, 0.685);
+}
+.doctor-form Input {
+  background-color: rgba(255, 255, 255, 0.096);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+}
+.doctor-form .doctor-input input {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(27, 24, 24, 0);
+}
+.doctor-first-section label,
+.doctor-second-section label {
+  color: rgb(202, 201, 201);
+}
+.doctor-already {
+  margin-left: 400px;
+  color: white;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.doctor-already p {
+  cursor: pointer;
+  color: #1677ff;
+}
+.doctor-already h3 {
+  font-size: medium;
+  font-weight: lighter;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}

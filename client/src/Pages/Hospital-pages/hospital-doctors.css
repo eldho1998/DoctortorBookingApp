@@ -1,0 +1,34 @@
+.doc-cards {
+  width: fit-content;
+  height: 350px;
+}
+.boxxx img {
+  width: fit-content;
+  height: 200px;
+}
+.boxxx {
+  height: 250px;
+  width: 300px;
+  border-radius: 20px;
+  margin-left: 50px;
+  margin-top: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+.image-names {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.doctor-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}

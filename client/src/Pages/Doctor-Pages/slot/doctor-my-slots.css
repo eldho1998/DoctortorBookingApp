@@ -1,0 +1,18 @@
+.myslots {
+  background-color: beige;
+  min-height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 25px;
+  justify-content: center;
+}
+.slots-cards {
+  width: 230px;
+  height: 150px;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
