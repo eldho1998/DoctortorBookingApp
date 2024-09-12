@@ -108,6 +108,7 @@ module.exports.AcceptAppointment = async (req, res) => {
 
 module.exports.RejectAppointment = async (req, res) => {
   try {
+    const { id } = req.params;
     const rejectappointment = await Appointment.findByIdAndUpdate(
       id,
       { status: 'Rejected' },

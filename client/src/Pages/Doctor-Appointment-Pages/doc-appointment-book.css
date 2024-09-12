@@ -16,16 +16,23 @@
 }
 .first-header h2,
 h1 {
-  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
-    sans-serif;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .first-header h2 {
   color: cadetblue;
   font-size: xx-large;
   cursor: pointer;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .first-header h1 {
   color: whitesmoke;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .log {
   background-image: url('../../../public/h2.png');
@@ -41,8 +48,9 @@ h1 {
 .contact p {
   font-weight: bolder;
   font-style: italic;
-  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
-    sans-serif;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .phonee {
   /* width: fit-content; */
@@ -56,7 +64,7 @@ h1 {
 .second-part {
   background-color: #f5f8fa;
   width: 100%;
-  height: 450px;
+  height: 350px;
 }
 .second-part img,
 h4 {
@@ -72,10 +80,16 @@ h4 {
 .name-pos h4 {
   line-height: 30px;
   font-size: larger;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .name-pos p {
   text-align: center;
   font-weight: bolder;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .name-pos {
   width: 1000px;
@@ -105,9 +119,16 @@ h4 {
   color: brown;
   text-align: start;
   font-size: larger;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: bolder;
 }
 .about p {
   text-align: start;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .book-button {
@@ -180,4 +201,38 @@ h4 {
 .link-no-underline {
   text-decoration: none;
   color: brown;
+}
+.firsst {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.search-regex {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.search-regex Input {
+  width: 500px;
+  cursor: pointer;
+}
+.search-regex p {
+  width: 201px;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: medium;
+  font-weight: bolder;
+}
+.bu button {
+  width: 100px;
+  height: 35px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: black;
+  color: whitesmoke;
+  cursor: pointer;
 }

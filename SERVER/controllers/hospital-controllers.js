@@ -150,14 +150,23 @@ module.exports.patchHospitalsById = async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    console.log(id);
-    console.log(body);
+    let updatedFields = {};
 
-    const hospital = await Hospital.findByIdAndUpdate(
-      id,
-      { $push: { doctors: body.doctor } },
-      { new: true }
-    );
+    if (req.file) {
+      const imageLink = `http://localhost:${process.env.PORT}/uploads/${req.file.filename}`;
+      updatedFields.image = imageLink;
+    }
+
+    if (body.doctor || body.phone) {
+      (updatedFields.$push = { doctors: body.doctor }),
+        (updatedFields.$push = { phone: body.phone });
+    }
+    console.log(id);
+    console.log(updatedFields);
+
+    const hospital = await Hospital.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
     if (!hospital) {
       res.status(404).json({ message: 'Hospital not found' });
     }

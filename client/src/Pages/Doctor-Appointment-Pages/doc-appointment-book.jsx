@@ -14,6 +14,7 @@ const DoctorAppointmentBooking = () => {
   const [display, setDisplay] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSlotId, setSelectedSlotId] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const fetchDoctorById = async () => {
     try {
@@ -89,10 +90,46 @@ const DoctorAppointmentBooking = () => {
       console.log(response.data);
       toast.success('Successfully Booked Appointment');
       setModalOpen(false);
+      smoothScroll(0);
     } catch (e) {
       console.log('Booking error:', e);
       toast.error('Sorry Error Booking!');
     }
+  };
+  console.log(window.scrollY);
+  const handleClickScroll = () => {
+    // window.scrollTo({
+    //   top: 600,
+    // });
+    smoothScroll(490);
+    setDisplay(!display);
+    setIsDisabled(true);
+  };
+
+  //smooth
+
+  const smoothScroll = targetY => {
+    let startY = window.scrollY;
+    let distance = targetY - startY;
+    let duration = 500; // Duration in milliseconds
+    let startTime = null;
+
+    const animation = currentTime => {
+      if (!startTime) startTime = currentTime;
+      let timeElapsed = currentTime - startTime;
+      let run = ease(timeElapsed, startY, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    };
+
+    const ease = (t, b, c, d) => {
+      t /= d / 2;
+      if (t < 1) return (c / 2) * t * t + b;
+      t--;
+      return (-c / 2) * (t * (t - 2) - 1) + b;
+    };
+
+    requestAnimationFrame(animation);
   };
 
   useEffect(() => {
@@ -137,7 +174,9 @@ const DoctorAppointmentBooking = () => {
               </h4>
               <p>{doctorById.about}</p>
               <div className="book-button">
-                <button onClick={() => setDisplay(!display)}>Book Now </button>
+                <button onClick={handleClickScroll} disabled={isDisabled}>
+                  Book Now
+                </button>
               </div>
             </div>
           </div>
@@ -148,8 +187,21 @@ const DoctorAppointmentBooking = () => {
           style={{ display: display ? 'block' : 'none' }}
           className="booking-card"
         >
-          <h1>AVAILABLE DATES AND SLOTS</h1>
-          <p>only limited slots!</p>
+          <div className="firsst">
+            <div className="h1">
+              <h1>AVAILABLE DATES AND SLOTS</h1>
+              <p>only limited slots!</p>
+            </div>
+
+            <div className="search-regex">
+              <p>Search your Slots by Date</p>
+              <Input type="date" />
+              <div className="bu">
+                <button>Search</button>
+              </div>
+            </div>
+          </div>
+
           <div className="slotss">
             {availSlots.map((item, index) => {
               return (
