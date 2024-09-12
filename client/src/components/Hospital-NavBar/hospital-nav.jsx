@@ -7,27 +7,21 @@ const HospitalNavBar = () => {
     <div className="Hospital-nav-main">
       <div className="hospital-nav-icon"></div>
       <div className="hospital-nav-bars">
-        <Link to={`/user/hospital/${id}`}>
-          <p>Home</p>
+        <Link className="hom" to={`/user/hospital/${id}`}>
+          Home
         </Link>
-        <Link to={`/user/hospital/${id}/department`}>
-          <p>Departments</p>
+        <Link className="depart" to={`/user/hospital/${id}/department`}>
+          Departments
           {console.log('nav bar hospital id:', id)}
         </Link>
-        <Link to={`/user/hospital/${id}/doctors`}>
-          <p>Doctors</p>
+        <Link className="dott" to={`/user/hospital/${id}/doctors`}>
+          Doctors
         </Link>
-        <Link>
-          <p>Health Advice</p>
-        </Link>
-        <Link>
-          <p>About</p>
-        </Link>
-        <Link>
-          <p>Contact</p>
-        </Link>
-        <Link to={'/user/home'}>
-          <p>User Home</p>
+        <Link className="healt">Health Advice</Link>
+        <Link className="abo">About</Link>
+        <Link className="cont">Contact</Link>
+        <Link className="use" to={'/user/home'}>
+          User Home
         </Link>
       </div>
     </div>
@@ -35,3 +29,5 @@ const HospitalNavBar = () => {
 };
 
 export default HospitalNavBar;
+//mvn clean install
+// java -jar "-Dspring.profiles.active=win"  target/alumnox-svc-api-0.0.1-SNAPSHOT.jar

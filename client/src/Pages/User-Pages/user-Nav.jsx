@@ -23,7 +23,7 @@ const UserNav = () => {
               HOME
             </Link>
             <Link className="link-profile" to={'/user/profile'}>
-              PROFILE
+              myPROFILE
             </Link>
             <Link className="link-bookings" to={'/user/bookings'}>
               myBOOKINGS

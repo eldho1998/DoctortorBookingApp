@@ -84,3 +84,6 @@
   width: 200px;
   height: 120px;
 }
+.butt Button {
+  z-index: 2;
+}

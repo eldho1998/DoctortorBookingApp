@@ -34,6 +34,11 @@ const UserHome = () => {
     }
   };
 
+  const onButtonClick = hosId => {
+    console.log('this is your hosid:', hosId);
+    navigate(`/user/hospital/${hosId}/doctors`);
+  };
+
   useEffect(() => {
     fetchHospital();
   }, []);
@@ -66,14 +71,23 @@ const UserHome = () => {
             className="cards"
           >
             <div className="detailsofhospitals">
+              <img src={hospital.image} />
               <h3>{hospital.name}</h3>
               <p>{hospital.address.city} </p>
-              {/* <img src={hospital.image} /> */}
-              {/* <p>{`  ${hospital.address.pincode}`}</p> */}
+            </div>
+            <div className="contact-hos">
+              <p>{hospital.phone}</p>
             </div>
 
             <div className="butt">
-              <Button>Take an Appointment!</Button>
+              <Button
+                onClick={event => {
+                  event.stopPropagation();
+                  onButtonClick(hospital._id);
+                }}
+              >
+                View Doctors
+              </Button>
             </div>
           </div>
         ))}
