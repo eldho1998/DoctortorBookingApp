@@ -1,5 +1,5 @@
 import './user-bookings.css';
-import UserNav from './user-Nav';
+import UserNav from '../../components/User-Navbar/user-Nav';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';

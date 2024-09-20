@@ -1,5 +1,5 @@
 import './addSlot.css';
-import NavBar from '../../../components/NavBar/navbar';
+import NavBar from '../../../components/Doctor-NavBar/doctor-navbar';
 import { Input, Button } from 'antd';
 
 import axios from '../../../utils/axios';

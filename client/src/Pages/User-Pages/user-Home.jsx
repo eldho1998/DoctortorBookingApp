@@ -1,5 +1,5 @@
 import './user-Home.css';
-import UserNav from './user-Nav';
+import UserNav from '../../components/User-Navbar/user-Nav';
 import { Button, Input, Spin, Flex } from 'antd';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
