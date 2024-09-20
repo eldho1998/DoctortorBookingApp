@@ -12,7 +12,6 @@ const UserBookings = () => {
 
   const userId = localStorage.getItem('ID');
   console.log('bookings page userId:', userId);
-  console.log('heyy you', bookings);
 
   const fetchBookingsofUser = async () => {
     try {
