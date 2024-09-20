@@ -20,17 +20,6 @@ module.exports.getUsersById = async (req, res) => {
   res.status(200).json({ message: 'Get All users by id' });
 };
 
-//3 . Post Users
-// module.exports.postUsers = async (req, res) => {
-//   try {
-//     const { body } = req;
-//     const user = await User.create(body);
-//     res.status(201).json({ message: 'Post Users', user });
-//   } catch (e) {
-//     res.status(500).json({ messahe: 'Error posting users', e });
-//   }
-// };
-
 // 4. Patch Users
 
 module.exports.patchUsers = async (req, res) => {

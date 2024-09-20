@@ -17,9 +17,7 @@ const HospitalNavBar = () => {
         <Link className="dott" to={`/user/hospital/${id}/doctors`}>
           Doctors
         </Link>
-        <Link className="healt">Health Advice</Link>
-        <Link className="abo">About</Link>
-        <Link className="cont">Contact</Link>
+
         <Link className="use" to={'/user/home'}>
           User Home
         </Link>
@@ -29,5 +27,3 @@ const HospitalNavBar = () => {
 };
 
 export default HospitalNavBar;
-//mvn clean install
-// java -jar "-Dspring.profiles.active=win"  target/alumnox-svc-api-0.0.1-SNAPSHOT.jar

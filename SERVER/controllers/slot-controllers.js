@@ -2,10 +2,32 @@ const Slot = require('../db/models/slot-Schema');
 const Appointment = require('../db/models/appointment-Schema');
 const mongoose = require('mongoose');
 
-// 1. Get Slots available
+// 1. Get Slots available filter method
 module.exports.getSlots = async (req, res) => {
-  const slot = await Slot.find().populate('doctorID');
-  res.status(200).json({ message: 'Total No.of Slots Gets', slot });
+  try {
+    const { doctorID, date } = req.query;
+    console.log('doctorID:', doctorID, 'date:', date);
+    const query = {};
+
+    if (doctorID) {
+      query.doctorID = doctorID;
+    }
+    if (date) {
+      query.date = date;
+    }
+
+    const slot = await Slot.find(query).populate('doctorID');
+
+    if (slot.length === 0) {
+      return res
+        .status(404)
+        .json({ message: 'No slots available for the selected date' });
+    }
+
+    res.status(200).json({ message: 'Slots Gets', slot });
+  } catch (e) {
+    res.status(500).json({ message: 'Error fetching slots', e });
+  }
 };
 
 // 2) GET by Slots by doctor id
@@ -58,8 +80,13 @@ module.exports.deleteSlots = async (req, res) => {
 // 6) DELETE Slot by id
 
 module.exports.deleteSlotsByID = async (req, res) => {
-  const slot = await Slot.findByIdAndDelete();
-  res.status(200).json({ message: 'delete slots by id', Slot });
+  try {
+    const { id } = req.params;
+    const slot = await Slot.findByIdAndDelete(id);
+    res.status(200).json({ message: 'delete slots by id', slot });
+  } catch (e) {
+    res.status(500).json({ message: 'Error', e });
+  }
 };
 
 //book Slots by user id

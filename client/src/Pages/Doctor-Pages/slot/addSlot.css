@@ -85,3 +85,38 @@
 .button {
   text-align: center;
 }
+
+@media (max-width: 360px) {
+  .Slotform-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .second-partt,
+  .datee,
+  .slots-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+  }
+
+  .Slotform-main p {
+    font-size: small;
+  }
+
+  .Slotform-main Input {
+    width: 200px;
+    height: 20px;
+  }
+  .timee input {
+    width: 100px;
+    height: 10px;
+  }
+
+  .button Button {
+    width: 70px;
+    margin-top: 20px;
+    font-size: smaller;
+  }
+}

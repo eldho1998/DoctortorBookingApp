@@ -4,6 +4,9 @@ import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Button } from 'antd';
+import { DeleteFilled } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const DoctorBookings = () => {
   const [docBookings, setDocBookings] = useState([]);
@@ -16,7 +19,7 @@ const DoctorBookings = () => {
       const response = await axios.get(`/appointment/doctor/${doctorId}`);
       setDocBookings(response.data.response);
       console.log('Hers ur bookingss:', response.data.response);
-      toast.success('Your Bookings');
+      toast.success('Your Appointments');
     } catch (e) {
       console.log('error:', e);
       toast.error('Error fetching your bookings');
@@ -43,6 +46,18 @@ const DoctorBookings = () => {
     }
   };
 
+  const onDeleleteClick = async appointmentId => {
+    console.log('clicked:', appointmentId);
+    try {
+      const deleted = await axios.delete(`/appointment/${appointmentId}`);
+      console.log(deleted);
+      toast.success('Deleted Successfully!');
+      fetchDoctorBookings();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     fetchDoctorBookings();
   }, []);
@@ -51,16 +66,37 @@ const DoctorBookings = () => {
     <div className="doc-bookings">
       <ToastContainer />
       <NavBar />
-      <h2>My Bookings</h2>
+      <h2>My Appointments</h2>
 
       <div className="cards-of-doctor-bookings">
         {docBookings.map((docbook, item) => {
           return (
             <div key={item} className="doctor-cards-book">
-              <p>
-                <h4>Date of appointment:</h4>
-                {new Date(docbook.slot[0]?.date).toLocaleDateString()}
-              </p>
+              <div className="daa">
+                <p>
+                  <h4>Date of appointment:</h4>
+                  {new Date(docbook.slot[0]?.date).toLocaleDateString()}
+                </p>
+                <div className="del">
+                  <Popconfirm
+                    onConfirm={() => onDeleleteClick(docbook._id)}
+                    placement="topLeft"
+                    okText="Yes"
+                    cancelText="No"
+                    title="Delete Appointment?"
+                    description="Are you sure to delete your appointment?"
+                    icon={
+                      <QuestionCircleOutlined
+                        style={{
+                          color: 'red',
+                        }}
+                      />
+                    }
+                  >
+                    <DeleteFilled className="ques" />
+                  </Popconfirm>
+                </div>
+              </div>
 
               <p>
                 <h4>Patient name:</h4>

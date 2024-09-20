@@ -1,6 +1,6 @@
 .search Input {
   position: absolute;
-  top: 130px;
+  top: 160px;
   width: 900px;
   margin-left: 250px;
   padding: 5px;
@@ -8,21 +8,18 @@
   background-color: rgba(255, 255, 255, 0.096);
   color: black;
 }
-.search Input:hover {
-  background-color: rgba(255, 255, 255, 0.096);
-  color: white;
-}
+
 .search Button {
   position: absolute;
   background-color: rgba(8, 8, 8, 0.863);
-  top: 130px;
+  top: 160px;
   left: 1160px;
   padding: 10px;
   color: whitesmoke;
 }
 .search h4 {
   position: absolute;
-  bottom: 450px;
+  bottom: 420px;
   left: 50px;
   color: rgba(0, 0, 0, 0.767);
   font-weight: bold;
@@ -86,4 +83,88 @@
 }
 .butt Button {
   z-index: 2;
+}
+
+@media (max-width: 360px) {
+  .search Input {
+    position: relative;
+    top: auto;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: smaller;
+  }
+
+  .search Button {
+    position: relative;
+    background-color: rgba(8, 8, 8, 0.863);
+    top: auto;
+    left: auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: fit-content;
+    padding: 10px;
+    font-size: smaller;
+  }
+
+  .search h4 {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 10px auto;
+    font-size: medium;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.767);
+    font-weight: bold;
+  }
+
+  .hospital-cards {
+    position: relative;
+    bottom: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: auto;
+  }
+
+  .cards {
+    flex-direction: column;
+    padding: 10px;
+    align-items: flex-start;
+    border-radius: 10px;
+  }
+
+  .cards h3 {
+    font-size: small;
+    color: navy;
+  }
+
+  .cards p {
+    font-size: smaller;
+    font-weight: bold;
+  }
+
+  .cards button:hover {
+    width: auto;
+  }
+
+  .detailsofhospitals img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    max-height: 120px;
+  }
+
+  .butt Button {
+    z-index: 2;
+    font-size: smaller;
+    padding: 8px 12px;
+  }
 }

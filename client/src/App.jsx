@@ -12,7 +12,6 @@ import PrivateRoute from './components/PrivateRoute';
 import UserSignUp from './Pages/User-Pages/user-sign-up';
 import UserLogin from './Pages/User-Pages/user-login';
 import UserHome from './Pages/User-Pages/user-Home';
-import UserProfile from './Pages/User-Pages/user-profile';
 import UserBookings from './Pages/User-Pages/user-bookings';
 import HospitalDetails from './Pages/Hospital-pages/hospital-details';
 import HospitalHome from './Pages/Hospital-pages/hospital-home';
@@ -20,6 +19,7 @@ import HospitalDepartment from './Pages/Hospital-pages/hospital-department';
 import HospitalDoctors from './Pages/Hospital-pages/hospital-doctors';
 import HospitalDepartmentDetails from './Pages/Hospital-pages/hos-dpt-details';
 import DoctorAppointmentBooking from './Pages/Doctor-Appointment-Pages/doc-appointment-book';
+import ResetPassword from './Pages/Doctor-Pages/doctor-reset-password';
 
 const App = () => {
   return (
@@ -35,6 +35,7 @@ const App = () => {
           <Route path="/doctor/addslot" element={<AddSlot />} />
           <Route path="/doctor/myslots" element={<DoctorMySlots />} />
           <Route path="/doctor/edit" element={<EditDoctor />} />
+          <Route path="doctor/reset/:token" element={<ResetPassword />} />
         </Route>
 
         <Route path="/user/signup" element={<UserSignUp />} />
@@ -42,7 +43,6 @@ const App = () => {
 
         <Route element={<PrivateRoute role="USER" />}>
           <Route path="/user/home" element={<UserHome />} />
-          <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/user/bookings" element={<UserBookings />} />
           <Route path="/user/hospital/:id" element={<HospitalDetails />} />
           <Route path="/user/hospital/details" element={<HospitalHome />} />

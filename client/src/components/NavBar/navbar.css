@@ -1,8 +1,12 @@
 .navbar-main {
   display: flex;
   width: 100%;
+  justify-content: space-between;
   height: 300px;
-  background-color: #32325d;
+  background-image: url('../../../public/bus4.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #9494e4;
 }
 .bars {
   display: flex;
@@ -24,7 +28,6 @@
   font-size: medium;
   font-family: 'Metropolis-Regular', 'Segoe UI', Helvetica Neue, Helvetica,
     sans-serif;
-  /* font-family: 'Mona Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
 }
 .bars h2:hover {
   background-color: rgb(59, 58, 58);
@@ -32,12 +35,16 @@
 }
 .contents img {
   width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .contents {
   padding: 20px;
   display: flex;
 }
 .details {
+  width: 250px;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -50,18 +57,115 @@
   color: inherit;
 }
 .details p {
-  color: whitesmoke;
+  color: rgb(27, 26, 26);
+  font-style: italic;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 .details h3 {
-  color: #ffa000;
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: xx-large;
+  font-weight: bolder;
+  color: #ff8800fd;
 }
-.edit-details Button {
-  margin-left: 550px;
-  border-radius: 80px;
+.edit-details button {
+  width: 100px;
+  height: 28px;
+  background-color: whitesmoke;
+  border: 1px solid rgb(59, 58, 58);
+  border-radius: 5px;
+  font-family: 'Metropolis-Regular', 'Segoe UI', Helvetica Neue, Helvetica,
+    sans-serif;
+  margin: 20px;
+  font-size: small;
+  cursor: pointer;
 }
-
+.edit-details button:hover {
+  background-color: rgb(59, 58, 58);
+  color: white;
+}
 .loader {
   margin-left: 650px;
   margin-top: 100px;
   text-align: center;
+}
+.yes {
+  display: flex;
+}
+
+@media (max-width: 360px) {
+  .navbar-main {
+    display: flex;
+    line-height: 1;
+    justify-content: flex-start;
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    padding: 10px;
+  }
+  .link {
+    display: flex;
+    height: 20px;
+  }
+  .bars {
+    flex-direction: row;
+    gap: 10px;
+    margin: 5px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bars h2 {
+    width: 40px;
+    padding: 5px;
+    font-size: 7px;
+  }
+
+  .contents img {
+    height: 85px;
+    width: 115px;
+  }
+
+  .contents {
+    flex-direction: row;
+    padding: 2px;
+  }
+
+  .details {
+    line-height: 1px;
+    width: 100%;
+    padding: 1px;
+    gap: 10px;
+  }
+
+  .details h3 {
+    font-size: smaller;
+  }
+
+  .details p {
+    font-size: xx-small;
+    padding: 5px;
+  }
+
+  .edit-details button {
+    width: 50px;
+    height: 14px;
+    font-size: xx-small;
+    margin-top: 130px;
+  }
+
+  .loader {
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .yes {
+    width: 200px;
+    height: 250px;
+    flex-direction: row;
+  }
 }

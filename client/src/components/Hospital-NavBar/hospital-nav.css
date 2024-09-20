@@ -48,3 +48,86 @@
   font-weight: bolder;
   color: rgb(4, 102, 102);
 }
+
+@media (max-width: 360px) {
+  .hospital-nav-icon {
+    background-image: url('../../../public/heart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 50px;
+    margin: 5px;
+    margin-left: 20px;
+  }
+
+  .hospital-nav-bars {
+    display: flex;
+    gap: 20px;
+    margin-left: 20px;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hospital-nav-bars p {
+    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+    font-size: small;
+    font-weight: bolder;
+    font-style: normal;
+    color: rgb(4, 102, 102);
+    cursor: pointer;
+  }
+
+  .Hospital-nav-main {
+    display: flex;
+    height: 60px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hospital-nav-bars p:hover {
+    color: goldenrod;
+  }
+
+  .cont,
+  .abo,
+  .dott,
+  .hom,
+  .depart,
+  .healt,
+  .use {
+    text-decoration: none;
+    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+    font-size: small;
+    font-weight: bolder;
+    color: rgb(4, 102, 102);
+  }
+
+  @media (max-width: 360px) {
+    .hospital-nav-icon {
+      width: 30px;
+      height: 40px;
+      margin-left: 10px;
+    }
+
+    .hospital-nav-bars {
+      gap: 10px;
+      margin-left: 10px;
+    }
+
+    .hospital-nav-bars p {
+      font-size: x-small;
+    }
+
+    .Hospital-nav-main {
+      height: 50px;
+    }
+  }
+}

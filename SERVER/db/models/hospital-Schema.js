@@ -39,5 +39,3 @@ const hospitalSchema = mongoose.Schema({
 
 const Hospital = mongoose.model('Hospital', hospitalSchema);
 module.exports = Hospital;
-//setx JAVA_HOME "C:\Program Files\java\jdk-17.0.12"
-// setx PATH "%PATH%;%JAVA_HOME%\bin";

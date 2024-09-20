@@ -1,13 +1,13 @@
 const Hospital = require('../db/models/hospital-Schema');
 
-//1) GET all Hospitals
+//1) GET all Hospitals regex
 module.exports.getHospitals = async (req, res) => {
   try {
     const { searchHospital } = req.query;
 
     let query;
 
-    if (searchHospital) {
+    if (searchHospital && searchHospital.trim()) {
       query = Hospital.find({
         name: {
           $regex: RegExp(searchHospital, 'i'),
@@ -59,16 +59,13 @@ module.exports.getDoctorsByHospitalId = async (req, res) => {
     const { id } = req.params; // Get hospital ID from request parameters
     console.log(`Fetching doctors for hospital ID: ${id}`);
 
-    // Find the hospital by ID and populate the doctors
     const hospital = await Hospital.findById(id).populate('doctors');
 
-    // Check if the hospital exists
     if (!hospital) {
       console.log('Hospital not found');
       return res.status(404).json({ message: 'Hospital not found' });
     }
 
-    // Return the doctors of the found hospital
     console.log('Doctors fetched:', hospital.doctors);
     res.status(200).json(hospital.doctors);
   } catch (err) {
@@ -178,8 +175,6 @@ module.exports.patchHospitalsById = async (req, res) => {
     res.status(500).json({ message: 'Error updating Hospital', e });
   }
 };
-
-// 5) DELETE all hospitals
 
 // 6) DELETE hospital by id
 
