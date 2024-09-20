@@ -1,5 +1,5 @@
 import './doctor-login.css';
-import { Button, Input } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
 import axios from '../../utils/axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 const DoctorLogin = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState({ email: '', password: '' });
+  const [modalOpen, setModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
 
   const onChange = (e, key) => {
     setLogin({ ...login, [key]: e.target.value });
@@ -18,8 +20,8 @@ const DoctorLogin = () => {
   const OnLoginClick = async () => {
     try {
       const response = await axios.post('/doctor/login', login);
-      console.log(response.data); //contain id and token
-      console.log(response.data.id); //contains id
+      console.log(response.data);
+      console.log(response.data.id);
 
       localStorage.setItem('token', response.data.token); // store it in localStorage
       localStorage.setItem('ID', response.data.id); // store it in localStorage
@@ -32,6 +34,35 @@ const DoctorLogin = () => {
   const BacktoMain = () => {
     navigate('/');
   };
+
+  const onForgotClick = () => {
+    setModalOpen(true);
+  };
+
+  const onOkPress = async () => {
+    console.log('sending email:', email);
+    try {
+      const response = await axios.post(
+        `/doctor/forgot`,
+        { email },
+        { timeout: 10000 }
+      );
+      console.log(response);
+      toast.success('Mail Send to your email');
+      setModalOpen(false);
+    } catch (e) {
+      console.error(e.response?.data?.message || e.message);
+    }
+  };
+
+  const onCancelPress = () => {
+    setModalOpen(false);
+  };
+
+  const onEmailChange = e => {
+    setEmail(e.target.value);
+  };
+  console.log(email);
 
   return (
     <div className="login">
@@ -61,16 +92,29 @@ const DoctorLogin = () => {
         </Button>
 
         <div className="forgot">
-          <a href="">
-            <p className="forgot-link">Forgot password?</p>
-          </a>
+          <p onClick={onForgotClick} className="forgot-link">
+            Forgot password?
+          </p>
         </div>
-
-        <p className="or">
-          OR <br></br>login with
-        </p>
-        <hr></hr>
-        <div className="image"></div>
+        <div className="modaal">
+          <Modal
+            title="Forgot Password?"
+            open={modalOpen}
+            onOk={onOkPress}
+            onCancel={onCancelPress}
+          >
+            <p>We'll send a link to your email !</p>
+            <p>Enter your registered Email Address</p>
+            <Input onChange={onEmailChange} type="text" />
+          </Modal>
+        </div>
+        <div className="ff">
+          <p className="or">
+            OR <br></br>login with
+          </p>
+          <hr></hr>
+          <div className="image"></div>
+        </div>
       </div>
     </div>
   );

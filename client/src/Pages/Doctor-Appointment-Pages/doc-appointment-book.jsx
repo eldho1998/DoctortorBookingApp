@@ -2,19 +2,22 @@ import './doc-appointment-book.css';
 import { useParams } from 'react-router-dom';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 
 const DoctorAppointmentBooking = () => {
   const { id } = useParams();
-  // console.log(id);
+  console.log('p', id);
   const [doctorById, setDoctorById] = useState({});
   const [availSlots, setAvailSlots] = useState([]);
   const [display, setDisplay] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSlotId, setSelectedSlotId] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [searchSlot, setSelectedSlotDates] = useState('');
+  const [message, setMessage] = useState('');
 
   const fetchDoctorById = async () => {
     try {
@@ -50,14 +53,12 @@ const DoctorAppointmentBooking = () => {
     }
   };
 
-  // Function to open the modal
   const openModal = _id => {
     setSelectedSlotId(_id);
     setModalOpen(true);
     console.log('Clicked Slot id:', _id);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -71,13 +72,11 @@ const DoctorAppointmentBooking = () => {
         slotId: selectedSlotId,
       };
 
-      // Check if userID exists
       if (!userID) {
         toast.error('User ID not found');
         return;
       }
 
-      // Ensure selectedSlotId is populated
       if (!selectedSlotId) {
         toast.error('Slot ID not selected');
         return;
@@ -98,20 +97,15 @@ const DoctorAppointmentBooking = () => {
   };
   console.log(window.scrollY);
   const handleClickScroll = () => {
-    // window.scrollTo({
-    //   top: 600,
-    // });
     smoothScroll(490);
     setDisplay(!display);
     setIsDisabled(true);
   };
 
-  //smooth
-
   const smoothScroll = targetY => {
     let startY = window.scrollY;
     let distance = targetY - startY;
-    let duration = 500; // Duration in milliseconds
+    let duration = 500;
     let startTime = null;
 
     const animation = currentTime => {
@@ -130,6 +124,37 @@ const DoctorAppointmentBooking = () => {
     };
 
     requestAnimationFrame(animation);
+  };
+
+  const onSlotSearch = e => {
+    setSelectedSlotDates(e.target.value);
+  };
+
+  const onHandleClick = async () => {
+    if (!searchSlot) {
+      setMessage('Please select a date first');
+      toast.error('Please select a date first!');
+      return;
+    }
+    try {
+      const doctorID = id;
+      const response = await axios.get(
+        `/slots?doctorID=${doctorID}&date=${searchSlot}`
+      );
+
+      if (response.data.slot.length > 0) {
+        setAvailSlots(response.data.slot);
+        setMessage('');
+        toast.success('Yes..! Available!');
+      }
+    } catch (e) {
+      if (e.response && e.response.status === 404) {
+        setAvailSlots([]);
+        setMessage("Sorry! There's no Slots for this day");
+        toast.info('Reload & Review Slots');
+      }
+      console.log('error', e);
+    }
   };
 
   useEffect(() => {
@@ -152,20 +177,17 @@ const DoctorAppointmentBooking = () => {
       </div>
       <div className="backk">
         <Link to={'/user/home'} className="link-no-underline">
-          User Home
+          Back
         </Link>
         <div className="contact">
-          <p>EMAIL: {`${doctorById.email}`}</p>
-          <p>CONTACT: {`${doctorById.phone}`}</p>
+          <p>email: {`${doctorById.email}`}</p>
+          <p>phone: {`${doctorById.phone}`}</p>
         </div>
       </div>
       <div className="second-part">
         <div className="details-of-doctor">
           <img src={doctorById.image} />
           <div className="name-pos">
-            <div className="about-name">
-              <p> ABOUT COUNSULTANT</p>
-            </div>
             <div className="about">
               <h4>
                 Dr.
@@ -195,14 +217,15 @@ const DoctorAppointmentBooking = () => {
 
             <div className="search-regex">
               <p>Search your Slots by Date</p>
-              <Input type="date" />
+              <Input onChange={onSlotSearch} type="date" />
               <div className="bu">
-                <button>Search</button>
+                <button onClick={onHandleClick}>Search</button>
               </div>
             </div>
           </div>
 
           <div className="slotss">
+            <div className="mess">{message && <p>{message}</p>}</div>
             {availSlots.map((item, index) => {
               return (
                 <div key={index} className="slot-card">
@@ -223,8 +246,8 @@ const DoctorAppointmentBooking = () => {
                     <Modal
                       title="Confirm Booking!"
                       visible={modalOpen}
-                      onOk={onOkBooking} // What happens when OK is clicked
-                      onCancel={closeModal} // What happens when Cancel is clicked
+                      onOk={onOkBooking}
+                      onCancel={closeModal}
                     >
                       <p>Are you sure you want to book this appointment?</p>
 

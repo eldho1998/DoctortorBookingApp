@@ -53,9 +53,7 @@ label {
   background-color: rgba(255, 255, 255, 0.219);
   border-color: rgba(218, 165, 32, 0.685);
 }
-.user-login-form form .bt {
-  text-align: end;
-}
+
 .user-login-main {
   width: 100%;
   background-image: url('../../../public/i1.jpg');
@@ -84,4 +82,83 @@ label {
   padding: 20px;
   cursor: pointer;
   color: #3d6d5f;
+}
+
+@media (max-width: 360px) {
+  .user-login-main {
+    width: 100%;
+    background-size: cover;
+    min-height: 100vh;
+  }
+
+  .user-login-main h2 {
+    font-size: large;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .user-login-main h3 {
+    font-size: small;
+    text-align: center;
+    color: #242442;
+  }
+
+  .user-login-main h1 {
+    top: 20px;
+    left: auto;
+    right: 20px;
+    font-size: medium;
+    width: 100%;
+    text-align: center;
+  }
+
+  .user-login-form form {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 20px auto;
+    width: 280px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .user-login-form form Input {
+    width: 270px;
+    height: 35px;
+    padding: 10px; /* Adjust padding */
+    background-color: rgba(255, 255, 255, 0.219);
+    border-color: rgba(218, 165, 32, 0.685);
+  }
+
+  .user-login-form form .bt {
+    text-align: center;
+  }
+
+  .social {
+    position: relative;
+    top: 360px;
+    left: auto;
+    margin: 20px auto;
+    width: 100px;
+    height: 30px;
+    background-size: contain;
+  }
+
+  .social p {
+    position: absolute;
+
+    width: 100px;
+    font-size: small;
+    text-align: center;
+  }
+  .user-login-main h1 {
+    font-size: smaller;
+    position: absolute;
+    top: 150px;
+  }
+  .backto-main p {
+    font-size: small;
+    padding: 10px;
+    cursor: pointer;
+  }
 }

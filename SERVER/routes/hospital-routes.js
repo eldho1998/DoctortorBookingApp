@@ -7,7 +7,6 @@ router.get('/', controller.getHospitals);
 router.get('/:id', controller.getHospitalsById);
 router.get('/:id/departments', controller.getDepartmentsByHospitalId);
 router.get('/:id/doctors', controller.getDoctorsByHospitalId);
-
 router.post('/', upload.single('image'), controller.postHospitals);
 router.patch('/:id', upload.single('image'), controller.patchHospitalsById);
 router.delete(

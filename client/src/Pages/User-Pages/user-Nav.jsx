@@ -14,23 +14,20 @@ const UserNav = () => {
   return (
     <div className="main">
       <div className="user-home-main">
-        {/* <div className="back"></div> */}
-
         <div className="nav-bars">
           <div className="icon"></div>
           <div className="user-bars">
             <Link className="link-home" to={'/user/home'}>
-              HOME
+              myHOME
             </Link>
-            <Link className="link-profile" to={'/user/profile'}>
-              myPROFILE
-            </Link>
+
             <Link className="link-bookings" to={'/user/bookings'}>
               myBOOKINGS
             </Link>
-            <Link className="link-logout" onClick={logoutClick}>
+
+            <p className="link-logout" onClick={logoutClick}>
               LOGOUT
-            </Link>
+            </p>
           </div>
         </div>
       </div>
@@ -39,5 +36,3 @@ const UserNav = () => {
 };
 
 export default UserNav;
-
-//Passw0!d

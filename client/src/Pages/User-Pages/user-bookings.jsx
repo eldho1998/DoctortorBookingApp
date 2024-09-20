@@ -3,12 +3,16 @@ import UserNav from './user-Nav';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { DeleteFilled } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const UserBookings = () => {
   const [bookings, setBookings] = useState([]);
 
   const userId = localStorage.getItem('ID');
   console.log('bookings page userId:', userId);
+  console.log('heyy you', bookings);
 
   const fetchBookingsofUser = async () => {
     try {
@@ -20,7 +24,6 @@ const UserBookings = () => {
       } else {
         toast.success('Your Bookings');
       }
-
       setBookings(fetchBookings);
       console.log('Bookings:', fetchBookings);
     } catch (e) {
@@ -29,7 +32,17 @@ const UserBookings = () => {
     }
   };
 
-  console.log('heyy you', bookings);
+  const onDeleleteClick = async appointmentId => {
+    console.log('its me slot:', appointmentId);
+    try {
+      const WhenDelete = await axios.delete(`/appointment/${appointmentId}`);
+      console.log('ss', WhenDelete);
+      fetchBookingsofUser();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     fetchBookingsofUser();
   }, []);
@@ -39,13 +52,13 @@ const UserBookings = () => {
       <UserNav />
       <ToastContainer />
       <div className="head-user-bookings">
-        <p> My Bookings</p>
+        <p> myBookings</p>
       </div>
       <div className="first-part-book">
         <div className="cards-of-booking">
-          {bookings.map((appointments, index) => {
+          {bookings.map(appointments => {
             return (
-              <div key={index} className="booked-cards">
+              <div key={appointments._id} className="booked-cards">
                 <div className="accept-or-reject">
                   <p>{appointments.status}</p>
                 </div>
@@ -65,7 +78,7 @@ const UserBookings = () => {
                       <h4>SLOT ID: </h4>
                     </div>
                     <div className="app">
-                      <p>{appointments.slot[0]._id}</p>
+                      <p>{appointments.slot[0]?._id}</p>
                     </div>
                   </div>
                   <div className="dat">
@@ -81,6 +94,25 @@ const UserBookings = () => {
                       <h4>TIME: </h4>
                       {appointments.slot[0]?.from} to {appointments.slot[0]?.to}
                     </p>
+                  </div>
+                  <div className="del">
+                    <Popconfirm
+                      onConfirm={() => onDeleleteClick(appointments._id)}
+                      placement="topLeft"
+                      okText="Yes"
+                      cancelText="No"
+                      title="Delete Slot?"
+                      description="Are you sure to delete your slot?"
+                      icon={
+                        <QuestionCircleOutlined
+                          style={{
+                            color: 'red',
+                          }}
+                        />
+                      }
+                    >
+                      <DeleteFilled className="ques" />
+                    </Popconfirm>
                   </div>
                 </div>
               </div>

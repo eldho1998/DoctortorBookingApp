@@ -2,7 +2,7 @@ const Department = require('../db/models/department-Schema');
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
-// 1) GET departments from api
+// 1) GET departments
 
 module.exports.getDepartments = async (req, res) => {
   const departments = await Department.find();

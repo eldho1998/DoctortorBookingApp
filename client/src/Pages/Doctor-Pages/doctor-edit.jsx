@@ -8,13 +8,11 @@ import { useNavigate } from 'react-router-dom';
 const EditDoctor = () => {
   const navigate = useNavigate();
 
-  // const [loading, setLoading] = useState(true); // Add loading state
-
   const [editDoctor, setEditDoctor] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    qualifiaction: '',
+    qualification: '',
     position: '',
     password: '',
     confirmPassword: '',
@@ -22,7 +20,11 @@ const EditDoctor = () => {
   });
 
   const onChange = (e, key) => {
-    setEditDoctor({ ...editDoctor, [key]: e.target.value });
+    if (key === 'image') {
+      setEditDoctor({ ...editDoctor, [key]: e.target.files[0] });
+    } else {
+      setEditDoctor({ ...editDoctor, [key]: e.target.value });
+    }
   };
   console.log(editDoctor);
 
@@ -33,19 +35,34 @@ const EditDoctor = () => {
       const response = await axios.get(`/doctor/${doctorId}`);
       console.log(response);
       setEditDoctor(response.data);
-      // setLoading(false); // Data has been loaded
     } catch (e) {
       toast.error(`${e}`);
-      // setLoading(false); // Stop loading even if there was an error
     }
   };
 
   const onSaveChanges = async () => {
     const doctorId = localStorage.getItem('ID');
+    const formData = new FormData();
+    formData.append('firstName', editDoctor.firstName);
+    formData.append('lastName', editDoctor.lastName);
+    formData.append('email', editDoctor.email);
+    formData.append('qualification', editDoctor.qualification);
+    formData.append('position', editDoctor.position);
+    if (editDoctor.password) {
+      formData.append('password', editDoctor.password);
+    }
+    if (editDoctor.image) {
+      formData.append('image', editDoctor.image);
+    }
 
     try {
-      const response = await axios.post(`/doctor/${doctorId}`, editDoctor);
-      localStorage.setItem('ID', response.data.id);
+      const response = await axios.put(`/doctor/${doctorId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response);
+      toast.success('Changes saved successfully');
       navigate('/doctor/home');
     } catch (e) {
       toast.error(`${e}`);
@@ -55,16 +72,6 @@ const EditDoctor = () => {
   useEffect(() => {
     getDoctorDetails();
   }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="loader-on-edit">
-  //       <Flex align="center" gap="middle">
-  //         <Spin size="large" />
-  //       </Flex>
-  //     </div>
-  //   );
-  // }
 
   if (!editDoctor.firstName) {
     return (
@@ -109,6 +116,9 @@ const EditDoctor = () => {
             value={editDoctor.qualification}
             onChange={e => onChange(e, 'qualification')}
           />
+          <p>Profile Picture</p>
+          <Input type="file" onChange={e => onChange(e, 'image')} />
+
           <p>Position</p>
           <Input
             type="text"

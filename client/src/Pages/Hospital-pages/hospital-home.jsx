@@ -2,8 +2,6 @@ import './hospital-home.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const HospitalHome = () => {
   const { id } = useParams();
@@ -15,9 +13,8 @@ const HospitalHome = () => {
       const response = await axios.get(`/hospital/${id}`);
       setHospital(response.data.response);
       console.log(response.data.response);
-      toast.success(`Welcome to hospital`);
     } catch (e) {
-      toast.error('Error');
+      console.log(e);
     }
   };
   const city = hospital.address?.city;
@@ -28,8 +25,6 @@ const HospitalHome = () => {
 
   return (
     <div className="hooo">
-      <ToastContainer />
-
       <div className="imagee">
         <img src={hospital.image} />
       </div>

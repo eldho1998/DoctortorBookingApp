@@ -4,10 +4,10 @@ import { Button, Input, Spin, Flex } from 'antd';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 
 const UserHome = () => {
   const [hospitals, setHospitals] = useState([]);
+  const [searchHospital, setSearchHospital] = useState('');
   const navigate = useNavigate();
 
   const fetchHospital = async () => {
@@ -20,8 +20,6 @@ const UserHome = () => {
     }
   };
 
-  // console.log('Hos:', hospitals);
-
   const onCardClick = async id => {
     try {
       const response = await axios.get(`/hospital/${id}`);
@@ -30,13 +28,44 @@ const UserHome = () => {
       localStorage.setItem('hospitalID', id);
       navigate(`/user/hospital/${id}`);
     } catch (e) {
-      toast.error('Hospital not found');
+      console.log('Hospital not found');
     }
   };
 
   const onButtonClick = hosId => {
     console.log('this is your hosid:', hosId);
     navigate(`/user/hospital/${hosId}/doctors`);
+  };
+
+  const onHospitalSearch = async e => {
+    setSearchHospital(e.target.value);
+    try {
+      if (searchHospital.length == 0) {
+        setHospitals(response.data);
+      }
+      const response = await axios.get(
+        `/hospital?searchHospital=${searchHospital}`
+      );
+      setHospitals(response.data);
+    } catch (e) {
+      console.log('Invalid');
+    }
+  };
+  console.log('Hospital name', searchHospital);
+
+  const onSearchClick = async () => {
+    try {
+      if (searchHospital.length == 0) {
+        setHospitals(response.data);
+      }
+      const response = await axios.get(
+        `/hospital?searchHospital=${searchHospital}`
+      );
+      setHospitals(response.data);
+      console.log('ith', response.data);
+    } catch (e) {
+      toast.error('Invalid Key');
+    }
   };
 
   useEffect(() => {
@@ -56,11 +85,18 @@ const UserHome = () => {
   return (
     <div className="userhome">
       <UserNav />
-      <ToastContainer />
+      <div className="head-user-bookings">
+        <p> myHome</p>
+      </div>
+
       <div className="search">
         <h4>Search your Hospitals</h4>
-        <Input placeholder="Search hospitals" type="search" />
-        <Button>Search</Button>
+        <Input
+          onChange={onHospitalSearch}
+          placeholder="Search hospitals"
+          type="search"
+        />
+        <Button onClick={onSearchClick}>Search</Button>
       </div>
 
       <div className="hospital-cards">

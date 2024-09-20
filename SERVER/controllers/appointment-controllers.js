@@ -78,11 +78,16 @@ module.exports.deleteAppointment = async (req, res) => {
   res.status(200).json({ messsage: 'delete all Appointment', Appointment });
 };
 
-// 6) DELETE Appointment by id
+// 6) DELETE Appointment by id (user,doctor)
 
 module.exports.deleteAppointmentByID = async (req, res) => {
-  const appointment = await Appointment.findByIdAndDelete();
-  res.status(200).json({ message: 'delete Appointment by id', Appointment });
+  try {
+    const { id } = req.params;
+    const appointment = await Appointment.findByIdAndDelete(id);
+    res.status(200).json({ message: 'delete Appointment by id', appointment });
+  } catch (e) {
+    res.status(500).json({ message: 'error', e });
+  }
 };
 
 // Accept and Reject Appointment By doctor ID

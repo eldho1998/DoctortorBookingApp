@@ -187,79 +187,90 @@ module.exports.doctorSignup = async (req, res) => {
 //7. Login By Doctor with generated password and their email
 
 module.exports.loginDoctor = async (req, res) => {
-  const { body } = req;
-  console.log(body);
-  const doctor = await Doctor.findOne({ email: body.email });
-  if (!doctor) {
-    return res.status(403).json({ message: 'Email or password Incorrect' });
-  }
-  console.log('Doctor found:', doctor);
-  console.log('Password from request:', body.password);
-  console.log('Hashed password from DB:', doctor.password);
-
-  const isMatching = await bcrypt.compare(body.password, doctor.password);
-  if (!isMatching) {
-    res.status(403).json({ message: 'Incorrect password or email' });
-  }
-
-  //token
-
-  const token = jwt.sign(
-    { id: doctor._id, role: 'doctor' },
-    process.env.DOCTORKEY,
-    {
-      expiresIn: '365d',
+  try {
+    const { body } = req;
+    console.log(body);
+    const doctor = await Doctor.findOne({ email: body.email });
+    if (!doctor) {
+      return res.status(404).json({ message: 'Email or password Incorrect' });
     }
-  );
+    console.log('Doctor found:', doctor);
+    console.log('Password from request:', body.password);
+    console.log('Hashed password from DB:', doctor.password);
 
-  res.status(200).json({ message: 'You are Logged in', token, id: doctor._id });
+    const isMatching = await bcrypt.compare(body.password, doctor.password);
+    if (!isMatching) {
+      res.status(403).json({ message: 'Incorrect password or email' });
+    }
+
+    //token
+
+    const token = jwt.sign(
+      { id: doctor._id, role: 'doctor' },
+      process.env.DOCTORKEY,
+      {
+        expiresIn: '365d',
+      }
+    );
+
+    return res
+      .status(200)
+      .json({ message: 'You are Logged in', token, id: doctor._id });
+  } catch (e) {
+    console.error('Error during Login:', e);
+    return res.status(500).json({ message: 'Server error' });
+  }
 };
 
 // 8. forgot password by doctor
 
 module.exports.forgotPassword = async (req, res) => {
-  const { email } = req.body;
-  const doctor = await Doctor.findOne({ email: email });
+  try {
+    const { email } = req.body;
+    const doctor = await Doctor.findOne({ email: email });
 
-  if (!doctor) {
-    res.status(403).json({ message: 'Email doesnot match' });
+    if (!doctor) {
+      return res.status(403).json({ message: 'Email doesnot match' });
+    }
+
+    //token
+
+    const resetToken = jwt.sign(
+      { email: email },
+      process.env.FORGOT_PASSWORD_KEY,
+      {
+        expiresIn: 301,
+      }
+    );
+
+    // to send mail by nodemailer
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'kudukurian123@gmail.com',
+        pass: 'masw ggju aycg hgri',
+      },
+    });
+    //setup email data:
+    let mailOptions = {
+      from: 'kudukurian123@gmail.com',
+      to: email,
+      subject: 'Hello Doctor ,You can Reset Your Password',
+      text: `Please reset your password using the link http://localhost:${process.env.PORT}/doctor/reset/${resetToken}`,
+    };
+
+    //send mail
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return res.status(500).json({ message: 'fail to send email' });
+      } else {
+        return res.status(200).json({ message: 'Mail Send' });
+      }
+    });
+  } catch (e) {
+    return res.status(500).json({ message: 'An error occurred', error });
   }
-
-  //token
-
-  const resetToken = jwt.sign(
-    { email: email },
-    process.env.FORGOT_PASSWORD_KEY,
-    {
-      expiresIn: 301,
-    }
-  );
-
-  // to send mail by nodemailer
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'kudukurian123@gmail.com',
-      pass: 'masw ggju aycg hgri',
-    },
-  });
-  //setup email data:
-  let mailOptions = {
-    from: 'kudukurian123@gmail.com',
-    to: email,
-    Subject: 'Hello Doctor ,You can Reset Your Password',
-    text: `Please reset your password using the link http://localhost:${process.env.PORT}/doctor/reset/${resetToken}`,
-  };
-
-  //send mail
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return res.status(404).json({ message: 'error' });
-    } else {
-      return res.status(200).json({ message: 'Mail Send' });
-    }
-  });
 };
 
 // 9. reset passwword
@@ -279,10 +290,24 @@ module.exports.resetPassword = async (req, res) => {
       { email: email },
       { password: hashedPassword }
     );
-    res.status(200).json({ messsage: 'password reset Successfully' });
+    res.status(200).json({ messsage: 'password reset Successfully', doctor });
   } catch (e) {
     return res.status(403).json({ message: 'Invalid Token' });
   }
+};
+
+module.exports.getRestPage = async (req, res) => {
+  const token = req.params.token;
+
+  // Verify the token (this is just an example, customize as needed)
+  jwt.verify(token, process.env.FORGOT_PASSWORD_KEY, err => {
+    if (err) {
+      return res.status(400).send('Invalid or expired token.');
+    }
+
+    // Render the reset password page
+    res.render('resetPassword', { token });
+  });
 };
 
 //pdf download

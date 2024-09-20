@@ -49,36 +49,39 @@ const NavBar = () => {
 
   return (
     <div className="navbar-main">
-      <div className="bars">
-        <NavLink className="link" to="/doctor/home">
-          <h2>HOME</h2>
-        </NavLink>
+      <div className="yes">
+        <div className="bars">
+          <NavLink className="link" to="/doctor/home">
+            <h2>HOME</h2>
+          </NavLink>
 
-        <NavLink className="link" to="/doctor/bookings">
-          <h2>APPOINTMENTS</h2>
-        </NavLink>
+          <NavLink className="link" to="/doctor/bookings">
+            <h2>APPOINTMENTS</h2>
+          </NavLink>
 
-        <NavLink className="link" to="/doctor/addslot">
-          <h2>ADD SLOTS</h2>
-        </NavLink>
-        <NavLink className="link" to="/doctor/myslots">
-          <h2>MY SLOTS</h2>
-        </NavLink>
-        <h2 onClick={logOut}>LOGOUT</h2>
+          <NavLink className="link" to="/doctor/addslot">
+            <h2>ADD SLOTS</h2>
+          </NavLink>
+          <NavLink className="link" to="/doctor/myslots">
+            <h2>MY SLOTS</h2>
+          </NavLink>
+          <h2 onClick={logOut}>LOGOUT</h2>
+        </div>
+        <div className="contents">
+          <img src={doctor.image} />
+
+          <div className="details">
+            <h3>Dr. {`${doctor.firstName} ${doctor.lastName}`}</h3>
+            <p>{doctor.email}</p>
+            <p>{doctor.qualification}</p>
+            <p>{doctor.position}</p>
+            <p>{doctor.phone}</p>
+          </div>
+        </div>
       </div>
-      <div className="contents">
-        <img src={doctor.image} />
 
-        <div className="details">
-          <h3>{`${doctor.firstName} ${doctor.lastName}`}</h3>
-          <p>{doctor.email}</p>
-          <p>{doctor.qualification}</p>
-          <p>{doctor.position}</p>
-          <p>{doctor.phone}</p>
-        </div>
-        <div className="edit-details">
-          <Button onClick={DoctorEditPage}>EDIT*</Button>
-        </div>
+      <div className="edit-details">
+        <button onClick={DoctorEditPage}>EDIT</button>
       </div>
     </div>
   );

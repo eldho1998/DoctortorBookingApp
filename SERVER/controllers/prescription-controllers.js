@@ -1,14 +1,9 @@
 const Presciption = require('../db/models/prescription-Schema');
 
-// 1) GET all prescription (rejux)
+// 1) GET all prescription
 module.exports.getprescription = async (req, res) => {
   const response = await Presciption.find();
   res.status(200).json({ message: 'Get all prescription', response });
-};
-
-// 2) GET by prescription id
-module.exports.getPrescriptionById = (req, res) => {
-  res.status(200).json({ message: 'Getting prescription By id' });
 };
 
 // 3) POST prescription

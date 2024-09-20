@@ -14,5 +14,4 @@ router.post('/', controllers.postAppointment);
 router.patch('/', controllers.patchAppointmentById);
 router.delete('/', controllers.deleteAppointment);
 router.delete('/:id', controllers.deleteAppointmentByID);
-
 module.exports = router;

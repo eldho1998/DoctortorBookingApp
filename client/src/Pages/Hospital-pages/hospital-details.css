@@ -11,3 +11,8 @@
   background-color: #32325d;
   color: whitesmoke;
 }
+@media (max-width: 360px) {
+  .hospital-header h1 {
+    font-size: medium;
+  }
+}

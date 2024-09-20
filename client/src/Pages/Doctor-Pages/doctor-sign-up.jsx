@@ -45,14 +45,14 @@ const DoctorSignUp = () => {
       formData.append('hospital', signup.hospital);
     } else {
       toast.error('Please select a hospital');
-      return; // Stop further execution if hospital is not selected
+      return;
     }
 
     if (signup.department) {
       formData.append('department', signup.department);
     } else {
       toast.error('Please select a department');
-      return; // Stop further execution if department is not selected
+      return;
     }
 
     try {
