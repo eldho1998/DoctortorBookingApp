@@ -1,5 +1,5 @@
 import './doctor-home.css';
-import NavBar from '../../components/NavBar/navbar';
+import NavBar from '../../components/Doctor-NavBar/doctor-navbar';
 import axios from '../../utils/axios';
 import html2pdf from 'html2pdf.js';
 import { useState, useEffect } from 'react';

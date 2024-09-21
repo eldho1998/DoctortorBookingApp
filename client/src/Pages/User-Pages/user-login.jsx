@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../utils/axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
+import React, { useRef } from 'react';
 
 const UserLogin = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const UserLogin = () => {
     email: '',
     password: '',
   });
+  const passwordRef = useRef(null);
+  const loginRef = useRef(null);
 
   const onChange = (e, key) => {
     setUserLogin({ ...userLogin, [key]: e.target.value });
@@ -37,6 +40,18 @@ const UserLogin = () => {
     navigate('/');
   };
 
+  const handleEmailKeyPress = e => {
+    if (e.key === 'Enter') {
+      passwordRef.current.focus();
+    }
+  };
+
+  const handlePasswordPress = e => {
+    if (e.key === 'Enter') {
+      loginRef.current.focus();
+    }
+  };
+
   return (
     <div className="user-login-main">
       <ToastContainer theme="light" transition={Bounce} />
@@ -56,6 +71,7 @@ const UserLogin = () => {
           <div className="email">
             <label>Email</label>
             <Input
+              onKeyDown={handleEmailKeyPress}
               onChange={e => onChange(e, 'email')}
               type="email"
               placeholder="example@gmail.com"
@@ -65,6 +81,8 @@ const UserLogin = () => {
           <div className="password">
             <label>Password</label>
             <Input
+              ref={passwordRef}
+              onKeyDown={handlePasswordPress}
               onChange={e => onChange(e, 'password')}
               type="password"
               placeholder="enter your password"
@@ -72,7 +90,7 @@ const UserLogin = () => {
           </div>
 
           <div className="bt">
-            <Button onClick={OnUserLoginClick} type="primary">
+            <Button ref={loginRef} onClick={OnUserLoginClick} type="primary">
               Login
             </Button>
           </div>

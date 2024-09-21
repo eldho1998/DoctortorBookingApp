@@ -1,5 +1,5 @@
 import './user-bookings.css';
-import UserNav from './user-Nav';
+import UserNav from '../../components/User-Navbar/user-Nav';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,7 +12,6 @@ const UserBookings = () => {
 
   const userId = localStorage.getItem('ID');
   console.log('bookings page userId:', userId);
-  console.log('heyy you', bookings);
 
   const fetchBookingsofUser = async () => {
     try {
@@ -57,10 +56,16 @@ const UserBookings = () => {
       <div className="first-part-book">
         <div className="cards-of-booking">
           {bookings.map(appointments => {
+            const statusColor =
+              appointments.status === 'Accepted'
+                ? '#11b90c'
+                : appointments.status === 'Rejected'
+                ? 'red'
+                : 'black';
             return (
               <div key={appointments._id} className="booked-cards">
                 <div className="accept-or-reject">
-                  <p>{appointments.status}</p>
+                  <p style={{ color: statusColor }}>{appointments.status}</p>
                 </div>
                 <img src={appointments.doctor[0]?.image} />
 

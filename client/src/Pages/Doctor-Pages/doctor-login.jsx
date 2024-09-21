@@ -5,12 +5,16 @@ import axios from '../../utils/axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 const DoctorLogin = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState({ email: '', password: '' });
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState('');
+
+  const passwordRef = useRef(null);
+  const loginRef = useRef(null);
 
   const onChange = (e, key) => {
     setLogin({ ...login, [key]: e.target.value });
@@ -64,6 +68,17 @@ const DoctorLogin = () => {
   };
   console.log(email);
 
+  const handleKeyDown = (e, nextInputRef, isFinalField = false) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isFinalField) {
+        OnLoginClick();
+      } else {
+        nextInputRef.current.focus();
+      }
+    }
+  };
+
   return (
     <div className="login">
       <h1>WELCOME DOCTOR</h1>
@@ -77,6 +92,7 @@ const DoctorLogin = () => {
         <div className="email">
           <p>Email ID</p>
           <Input
+            onKeyDown={e => handleKeyDown(e, passwordRef)}
             type="email"
             placeholder="example@gmail.com"
             onChange={e => onChange(e, 'email')}
@@ -85,9 +101,14 @@ const DoctorLogin = () => {
 
         <div className="password">
           <p>Password</p>
-          <Input type="password" onChange={e => onChange(e, 'password')} />
+          <Input
+            ref={passwordRef}
+            onKeyDown={e => handleKeyDown(e, loginRef)}
+            type="password"
+            onChange={e => onChange(e, 'password')}
+          />
         </div>
-        <Button type="primary" onClick={OnLoginClick}>
+        <Button ref={loginRef} type="primary" onClick={OnLoginClick}>
           Login
         </Button>
 

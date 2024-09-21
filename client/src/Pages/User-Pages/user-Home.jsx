@@ -1,14 +1,16 @@
 import './user-Home.css';
-import UserNav from './user-Nav';
+import UserNav from '../../components/User-Navbar/user-Nav';
 import { Button, Input, Spin, Flex } from 'antd';
 import axios from '../../utils/axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import React, { useRef } from 'react';
 
 const UserHome = () => {
   const [hospitals, setHospitals] = useState([]);
   const [searchHospital, setSearchHospital] = useState('');
   const navigate = useNavigate();
+  const searchRef = useRef(null);
 
   const fetchHospital = async () => {
     try {
@@ -68,6 +70,12 @@ const UserHome = () => {
     }
   };
 
+  const handleSearchPress = e => {
+    if (e.key === 'Enter') {
+      searchRef.current.focus();
+    }
+  };
+
   useEffect(() => {
     fetchHospital();
   }, []);
@@ -92,11 +100,14 @@ const UserHome = () => {
       <div className="search">
         <h4>Search your Hospitals</h4>
         <Input
+          onKeyDown={handleSearchPress}
           onChange={onHospitalSearch}
           placeholder="Search hospitals"
           type="search"
         />
-        <Button onClick={onSearchClick}>Search</Button>
+        <Button ref={searchRef} onClick={onSearchClick}>
+          Search
+        </Button>
       </div>
 
       <div className="hospital-cards">

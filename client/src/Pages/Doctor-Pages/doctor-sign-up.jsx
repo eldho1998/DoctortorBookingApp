@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from '../../utils/axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 const { Option } = Select;
 
@@ -20,6 +21,16 @@ const DoctorSignUp = () => {
     department: '',
     hospital: '',
   });
+
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const qualificationRef = useRef(null);
+  const positionRef = useRef(null);
+  const hospitalRef = useRef(null);
+  const departmentRef = useRef(null);
+  const imageRef = useRef(null);
+  const signupRef = useRef(null);
 
   const onChange = (e, key) => {
     if (key == 'image') {
@@ -76,6 +87,17 @@ const DoctorSignUp = () => {
     navigate('/doctor/login');
   };
 
+  const handleKeyDown = (e, nextInputRef, isFinalField = false) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isFinalField) {
+        onSignUpClick();
+      } else {
+        nextInputRef.current.focus();
+      }
+    }
+  };
+
   return (
     <div className="doctor-main">
       <div className="Bblack"></div>
@@ -86,13 +108,24 @@ const DoctorSignUp = () => {
             <ToastContainer />
             <div className="doctor-first-section">
               <label>first name</label>
-              <Input onChange={e => onChange(e, 'firstName')} type="text" />
+              <Input
+                onKeyDown={e => handleKeyDown(e, lastNameRef)}
+                onChange={e => onChange(e, 'firstName')}
+                type="text"
+              />
 
               <label>last name</label>
-              <Input onChange={e => onChange(e, 'lastName')} type="text" />
+              <Input
+                ref={lastNameRef}
+                onKeyDown={e => handleKeyDown(e, emailRef)}
+                onChange={e => onChange(e, 'lastName')}
+                type="text"
+              />
 
               <label>email</label>
               <Input
+                ref={emailRef}
+                onKeyDown={e => handleKeyDown(e, phoneRef)}
                 onChange={e => onChange(e, 'email')}
                 type="text"
                 placeholder="example@gmail.com"
@@ -100,6 +133,8 @@ const DoctorSignUp = () => {
 
               <label>phone</label>
               <Input
+                ref={phoneRef}
+                onKeyDown={e => handleKeyDown(e, qualificationRef)}
                 type="text"
                 placeholder="enter your 10 digit mobile number"
                 onChange={e => onChange(e, 'phone')}
@@ -107,13 +142,25 @@ const DoctorSignUp = () => {
             </div>
             <div className="doctor-second-section">
               <label>qualification</label>
-              <Input onChange={e => onChange(e, 'qualification')} type="text" />
+              <Input
+                ref={qualificationRef}
+                onKeyDown={e => handleKeyDown(e, positionRef)}
+                onChange={e => onChange(e, 'qualification')}
+                type="text"
+              />
 
               <label>position</label>
-              <Input onChange={e => onChange(e, 'position')} type="text" />
+              <Input
+                ref={positionRef}
+                onKeyDown={e => handleKeyDown(e, hospitalRef)}
+                onChange={e => onChange(e, 'position')}
+                type="text"
+              />
 
               <label for="hospital">hospital</label>
               <Select
+                ref={hospitalRef}
+                onKeyDown={e => handleKeyDown(e, departmentRef)}
                 onChange={selectedHospitalId => {
                   console.log('Selected hospital ID:', selectedHospitalId);
                   onChange(
@@ -143,6 +190,8 @@ const DoctorSignUp = () => {
 
               <label for="department">department</label>
               <Select
+                ref={departmentRef}
+                onKeyDown={e => handleKeyDown(e, imageRef)}
                 onChange={selectedDepartmentId => {
                   console.log('Selected department Id:', selectedDepartmentId);
                   onChange(
@@ -166,6 +215,8 @@ const DoctorSignUp = () => {
               <div className="doctor-image">
                 <label>image</label>
                 <input
+                  ref={imageRef}
+                  onKeyDown={e => handleKeyDown(e, signupRef)}
                   onChange={e => onChange(e, 'image')}
                   className="doctor-input"
                   type="file"
@@ -174,7 +225,7 @@ const DoctorSignUp = () => {
               </div>
 
               <div className="doctor-Sign-in">
-                <Button onClick={onSignUpClick} type="primary">
+                <Button ref={signupRef} onClick={onSignUpClick} type="primary">
                   <p>Sign Up</p>
                 </Button>
               </div>

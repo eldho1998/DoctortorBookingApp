@@ -2,8 +2,8 @@
   position: absolute;
   bottom: 30px;
   left: 400px;
-  border: 1px solid rgba(211, 211, 211, 0.603);
-  box-shadow: 0 0 10px 10px rgba(211, 211, 211, 0.199);
+  border: 1px solid rgb(235, 235, 218);
+  box-shadow: 0 0 7px 7px white;
   border-radius: 15px;
   padding: 15px;
   width: 650px;
@@ -12,18 +12,25 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: all 0.8s;
+  cursor: pointer;
 }
+.doctor-edit-form:hover {
+  box-shadow: 0 0 2px 2px lightgray;
+  transition: all 0.8s;
+}
+
 .doctor-edit-form .save-changes {
   text-align: center;
 }
 .doctor-edit-main {
   position: relative;
-
+  background-color: rgb(221, 221, 189);
   width: 100%;
   height: 650px;
 }
 .doctor-edit-form Input {
-  background-color: rgba(211, 211, 211, 0.041);
+  background-color: rgb(236, 236, 209);
   border-color: rgba(211, 211, 211, 0.418);
 }
 .back {

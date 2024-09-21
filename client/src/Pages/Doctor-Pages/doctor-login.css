@@ -75,6 +75,7 @@ hr {
 }
 
 .back-to-main-doctor p {
+  font-size: smaller;
   padding: 10px;
   margin-left: 10px;
   color: whitesmoke;
