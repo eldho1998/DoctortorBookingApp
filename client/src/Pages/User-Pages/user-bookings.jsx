@@ -56,10 +56,16 @@ const UserBookings = () => {
       <div className="first-part-book">
         <div className="cards-of-booking">
           {bookings.map(appointments => {
+            const statusColor =
+              appointments.status === 'Accepted'
+                ? '#11b90c'
+                : appointments.status === 'Rejected'
+                ? 'red'
+                : 'black';
             return (
               <div key={appointments._id} className="booked-cards">
                 <div className="accept-or-reject">
-                  <p>{appointments.status}</p>
+                  <p style={{ color: statusColor }}>{appointments.status}</p>
                 </div>
                 <img src={appointments.doctor[0]?.image} />
 

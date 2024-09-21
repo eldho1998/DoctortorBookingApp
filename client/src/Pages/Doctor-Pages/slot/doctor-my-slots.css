@@ -1,5 +1,5 @@
 .myslots {
-  background-color: beige;
+  background-color: rgb(228, 228, 196);
   min-height: 400px;
   display: flex;
   flex-wrap: wrap;
@@ -11,7 +11,7 @@
   width: 230px;
   height: 180px;
   border: 1px solid lightgrey;
-  box-shadow: 0 0 5px 5px whitesmoke;
+  box-shadow: 0 0 7px 7px white;
   cursor: pointer;
   padding: 10px;
   gap: 20px;

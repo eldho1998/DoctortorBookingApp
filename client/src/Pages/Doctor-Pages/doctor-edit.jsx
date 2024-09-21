@@ -73,16 +73,6 @@ const EditDoctor = () => {
     getDoctorDetails();
   }, []);
 
-  if (!editDoctor.firstName) {
-    return (
-      <div className="loader-on-edit">
-        <Flex align="center" gap="middle">
-          <Spin size="large" />
-        </Flex>
-      </div>
-    );
-  }
-
   return (
     <div className="doctor-edit-main">
       <div className="back"></div>
@@ -126,9 +116,14 @@ const EditDoctor = () => {
             onChange={e => onChange(e, 'position')}
           />
           <p>New Password*</p>
-          <Input type="password" onChange={e => onChange(e, 'password')} />
+          <Input
+            required
+            type="password"
+            onChange={e => onChange(e, 'password')}
+          />
           <p>Confirm new password*</p>
           <Input
+            required
             type="password"
             onChange={e => onChange(e, 'confirmPassword')}
           />

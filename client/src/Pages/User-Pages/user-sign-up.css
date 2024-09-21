@@ -10,7 +10,7 @@
   top: 80px;
 }
 .user-form Input {
-  color: whitesmoke;
+  color: black;
   border-color: rgba(211, 211, 211, 0.61);
   background-color: rgba(59, 57, 57, 0.726);
 }
@@ -110,7 +110,7 @@ p {
       width: 100%;
       padding: 10px;
       font-size: small;
-      background-color: rgba(59, 57, 57, 0.726);
+      /* background-color: rgba(59, 57, 57, 0.726); */
     }
 
     .user-form label {
